@@ -44,12 +44,60 @@ const addEmployee = function(){
         .prompt([
             {
                 type: "input",
-                message: "manager's Name",
+                message: "what is employee's Name",
                 name: "name",
             },
             {
                 type: "input",
-                message: "manager's Id",
+                message: "what is employee's Id",
+                name: "id",
+            },
+            {
+                type: "input",
+                message: "what is employee's Email",
+                name: "Email",
+            }
+           
+        ])
+
+
+}
+const addintern = function(){
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "what is intern's Name",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "what is intern's Id",
+                name: "id",
+            },
+            {
+                type: "input",
+                message: "what is intern's Email",
+                name: "Email",
+            }
+            {
+                type: "input",
+                message: "what school did intern attend to",
+                name: "school",
+            }
+        ])
+}
+const addEngineer = function(){
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "what is enginner's Name",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "what is engineer's Id",
                 name: "id",
             },
             {
@@ -57,10 +105,12 @@ const addEmployee = function(){
                 message: "manager's Email",
                 name: "Email",
             }
-           
+            {
+                type: "input",
+                message: "manager's Officenumber",
+                name: "officeNumber",
+            }
         ])
-
-
 }
 // and to create objects for each team member (using the correct classes as blueprints!)
 
