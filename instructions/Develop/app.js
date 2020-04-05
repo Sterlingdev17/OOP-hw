@@ -21,25 +21,47 @@ const createTeam = function(){
                 type: "input",
                 message: "manager's Name",
                 name: "name",
+            },
+            {
+                type: "input",
+                message: "manager's Id",
+                name: "id",
+            },
+            {
+                type: "input",
+                message: "manager's Email",
+                name: "Email",
             }
             {
                 type: "input",
-                message: "manager's Name",
-                name: "name",
-            }
-            {
-                type: "input",
-                message: "manager's Name",
-                name: "name",
-            }
-            {
-                type: "input",
-                message: "manager's Name",
-                name: "name",
+                message: "manager's Officenumber",
+                name: "officeNumber",
             }
         ])
 }
+const addEmployee = function(){
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "manager's Name",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "manager's Id",
+                name: "id",
+            },
+            {
+                type: "input",
+                message: "manager's Email",
+                name: "Email",
+            }
+           
+        ])
 
+
+}
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
