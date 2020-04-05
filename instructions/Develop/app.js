@@ -31,14 +31,45 @@ const createTeam = function(){
                 type: "input",
                 message: "manager's Email",
                 name: "Email",
-            }
+            },
             {
                 type: "input",
                 message: "manager's Officenumber",
                 name: "officeNumber",
             }
         ])
-}
+        .then(userResponce => {
+            const manager = new Manager(userResponce.name, userResponce.id, userResponce.officeNumber)
+            allEmployee.push(manager)
+            addRole();
+        });
+
+
+}       
+const addRole = function(){
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "what type of employee do you wanna add",
+                name: "role",
+                choices: ["engineer","intern", "other", "I am done adding roles" ]
+
+            }]).then(userResponse =>{
+                if (userResponse.role === "engineer") {
+                     addEngineer();
+                    
+                }else if (userResponse.role === "intern") {
+                     addintern();
+                    
+                }else if (userResponse.role === "other") {
+                     addEmployee();
+                    
+                }else {
+                    buildTeam()
+                }
+            }) 
+} 
 const addEmployee = function(){
     inquirer
         .prompt([
@@ -58,7 +89,11 @@ const addEmployee = function(){
                 name: "Email",
             }
            
-        ])
+        ]).then(userResponce => {
+            const newEmployee = new allEmployee(userResponce.name, userResponce.id, userResponce.email)
+            allEmployee.push(newEmployee);
+            addRole();
+        })
 
 
 }
@@ -67,25 +102,29 @@ const addintern = function(){
         .prompt([
             {
                 type: "input",
-                message: "what is intern's Name",
+                message: "what is intern's Name?",
                 name: "name",
             },
             {
                 type: "input",
-                message: "what is intern's Id",
+                message: "what is intern's Id?",
                 name: "id",
             },
             {
                 type: "input",
-                message: "what is intern's Email",
+                message: "what is intern's Email?",
                 name: "Email",
-            }
+            },
             {
                 type: "input",
-                message: "what school did intern attend to",
+                message: "what school did intern attend to?",
                 name: "school",
             }
-        ])
+        ]).then(userResponce => {
+            const intern = new Intern(userResponce.name, userResponce.id, userResponce.email, userResponce.school)
+            allEmployee.push(intern);
+            addRole();
+        })
 }
 const addEngineer = function(){
     inquirer
@@ -102,16 +141,24 @@ const addEngineer = function(){
             },
             {
                 type: "input",
-                message: "manager's Email",
+                message: "what is enginner's Email",
                 name: "Email",
-            }
+            },
             {
                 type: "input",
-                message: "manager's Officenumber",
-                name: "officeNumber",
+                message: "what is engineer 's github",
+                name: "github",
             }
-        ])
+        ]).then(userResponce => {
+            const enginner = new Engineer(userResponce.name, userResponce.id, userResponce.Email, userResponce.github)
+            allEmployee.push(enginner);
+            addRole();
+        })
 }
+const buildTeam = function (){
+    fs.writeFileSync(outputPath, render(allEmployee), "utf8")
+}
+createTeam();
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
