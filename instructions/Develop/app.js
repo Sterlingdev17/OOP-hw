@@ -1,6 +1,7 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const Employee = require("./lib/Employee")
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -30,22 +31,25 @@ const createTeam = function(){
             {
                 type: "input",
                 message: "manager's Email",
-                name: "Email",
+                name: "email",
             },
             {
                 type: "input",
-                message: "manager's Officenumber",
+                message: "manager's officeNumber",
                 name: "officeNumber",
             }
         ])
+        // get manager info
         .then(userResponce => {
-            const manager = new Manager(userResponce.name, userResponce.id, userResponce.officeNumber)
+            const manager = new Manager(userResponce.name, userResponce.id, userResponce.email, userResponce.officeNumber)
             allEmployee.push(manager)
+            // call addroll function to ask if they wanna add anothe employee
             addRole();
         });
 
 
-}       
+}
+// this is the addroll function       
 const addRole = function(){
     inquirer
         .prompt([
@@ -54,7 +58,7 @@ const addRole = function(){
                 message: "what type of employee do you wanna add",
                 name: "role",
                 choices: ["engineer","intern", "other", "I am done adding roles" ]
-
+            // checking for role to be prompt
             }]).then(userResponse =>{
                 if (userResponse.role === "engineer") {
                      addEngineer();
@@ -86,11 +90,11 @@ const addEmployee = function(){
             {
                 type: "input",
                 message: "what is employee's Email",
-                name: "Email",
+                name: "email",
             }
            
         ]).then(userResponce => {
-            const newEmployee = new allEmployee(userResponce.name, userResponce.id, userResponce.email)
+            const newEmployee = new Employee(userResponce.name, userResponce.id, userResponce.email)
             allEmployee.push(newEmployee);
             addRole();
         })
@@ -113,7 +117,7 @@ const addintern = function(){
             {
                 type: "input",
                 message: "what is intern's Email?",
-                name: "Email",
+                name: "email",
             },
             {
                 type: "input",
@@ -131,7 +135,7 @@ const addEngineer = function(){
         .prompt([
             {
                 type: "input",
-                message: "what is enginner's Name",
+                message: "what is engineer's Name",
                 name: "name",
             },
             {
@@ -141,8 +145,8 @@ const addEngineer = function(){
             },
             {
                 type: "input",
-                message: "what is enginner's Email",
-                name: "Email",
+                message: "what is engineer's Email",
+                name: "email",
             },
             {
                 type: "input",
@@ -150,8 +154,8 @@ const addEngineer = function(){
                 name: "github",
             }
         ]).then(userResponce => {
-            const enginner = new Engineer(userResponce.name, userResponce.id, userResponce.Email, userResponce.github)
-            allEmployee.push(enginner);
+            const engineer = new Engineer(userResponce.name, userResponce.id, userResponce.email, userResponce.github)
+            allEmployee.push(engineer);
             addRole();
         })
 }
